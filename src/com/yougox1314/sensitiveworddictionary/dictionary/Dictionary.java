@@ -1,6 +1,7 @@
 package com.yougox1314.sensitiveworddictionary.dictionary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -57,5 +58,30 @@ public class Dictionary {
 			currentNode.sort();
 			
 		}			
+	}
+	/**
+	 * @return
+	 */
+	public String changeSensWord(String input){
+		if(input==null||"".equals(input))
+			return "";
+		char[] chars = input.toCharArray();
+		for(int start=0;start<chars.length;start++){
+			int cursor = start;
+			if((cursor = this.findword(root, chars, cursor))!=-1){
+				Arrays.fill(chars, start, cursor+1, '*');
+			}
+		}
+		return String.valueOf(chars);
+	}
+	private int findword(NodeData node,char[] word,int index){
+		if(node==null)
+			return -1;
+		if(node.findInEndWords(word[index])>=0)
+			return index;
+		if(node.findInNextWords(word[index])>=0){
+			return findword(node.getNextNode(word[index]), word, ++index);
+		}
+		return -1;
 	}
 }

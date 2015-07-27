@@ -34,7 +34,8 @@ public class BootStrap {
 				senstiveWords = "";
 			}
 			dictionray.init(senstiveWords.split(","));
-			log.debug("敏感词字典创建完成");
+//			log.debug("敏感词字典创建完成");
+			System.out.println(dictionray.changeSensWord("我不是开心糖果啊，你是谁啊？"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
